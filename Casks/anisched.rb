@@ -12,8 +12,6 @@ cask "anisched" do
       strategy :github_latest
     end
   
-    depends_on macos: :el_capitan
-  
     app "AniSched.app"
   
     zap trash: [
