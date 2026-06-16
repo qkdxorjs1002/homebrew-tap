@@ -3,7 +3,7 @@ class Taplctl < Formula
 
   desc "Codex workflow harness backed by repo-local SQLite state"
   homepage "https://github.com/qkdxorjs1002/tapl"
-  url "https://github.com/qkdxorjs1002/tapl.git", tag: "v0.2.0"
+  url "https://github.com/qkdxorjs1002/tapl.git", tag: "0.2.0"
   version "0.2.0"
   license "MIT"
   head "https://github.com/qkdxorjs1002/tapl.git", branch: "main"
@@ -11,9 +11,9 @@ class Taplctl < Formula
   depends_on "python@3.12"
 
   def install
-    cd "tapl" do
-      virtualenv_install_with_resources
-    end
+    venv = virtualenv_create(libexec, "python3.12")
+    venv.pip_install resources
+    venv.pip_install_and_link buildpath/"tapl"
   end
 
   test do
