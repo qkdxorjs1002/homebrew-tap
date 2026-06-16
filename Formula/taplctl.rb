@@ -3,9 +3,9 @@ class Taplctl < Formula
 
   desc "Codex workflow harness backed by repo-local SQLite state"
   homepage "https://github.com/qkdxorjs1002/tapl"
-  url "https://github.com/qkdxorjs1002/tapl/releases/download/0.2.8/taplctl-0.2.8-py3-none-any.whl"
-  sha256 "864e9cb763f164a5a1b83365606a0b94e47945da7b5969d302686bb0d53d1e31"
-  version "0.2.8"
+  url "https://github.com/qkdxorjs1002/tapl/releases/download/0.2.9/taplctl-0.2.9-py3-none-any.whl"
+  sha256 "39d865cb3e4aef973e9329e32e603563000d6915918092ab542b4d8feca9611b"
+  version "0.2.9"
   license "MIT"
   head "https://github.com/qkdxorjs1002/tapl.git", branch: "main"
 
