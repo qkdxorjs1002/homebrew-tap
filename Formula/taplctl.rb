@@ -3,9 +3,9 @@ class Taplctl < Formula
 
   desc "Codex workflow harness backed by repo-local SQLite state"
   homepage "https://github.com/qkdxorjs1002/tapl"
-  url "https://github.com/qkdxorjs1002/tapl/releases/download/0.3.2/taplctl-0.3.2-py3-none-any.whl"
-  version "0.3.2"
-  sha256 "42ee604f2f7594cb22f95e554fc59df1f59bbc43c95c203b891a2a7988f61cc4"
+  url "https://github.com/qkdxorjs1002/tapl/releases/download/0.3.3/taplctl-0.3.3-py3-none-any.whl"
+  version "0.3.3"
+  sha256 "227825d36c503deebac9bc42b9277c04d78ff1f27783f11a7387183770f9b4bc"
   license "MIT"
   head "https://github.com/qkdxorjs1002/tapl.git", branch: "main"
 
@@ -221,16 +221,8 @@ class Taplctl < Formula
     wheel = Pathname.glob("*.whl").first
     raise "Could not find taplctl wheel" unless wheel
 
-    wheelhouse = buildpath/"wheelhouse"
-    wheelhouse.mkpath
-    resources.each do |resource|
-      resource.stage { wheelhouse.install Dir["*.whl"] }
-    end
-
-    virtualenv_create(libexec, "python3.12", system_site_packages: false)
-    system "python3.12", "-m", "pip", "--python=#{libexec}/bin/python", "install",
-           "--no-index", "--find-links=#{wheelhouse}", "--no-compile", wheel
-    bin.install_symlink libexec/"bin/taplctl"
+    venv = virtualenv_create(libexec, "python3.12", system_site_packages: false)
+    venv.pip_install_and_link wheel
   end
 
   test do
