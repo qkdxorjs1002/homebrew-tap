@@ -3,9 +3,9 @@ class Taplctl < Formula
 
   desc "Codex workflow harness backed by repo-local SQLite state"
   homepage "https://github.com/qkdxorjs1002/tapl"
-  url "https://github.com/qkdxorjs1002/tapl/releases/download/0.5.1/taplctl-0.5.1-py3-none-any.whl"
-  version "0.5.1"
-  sha256 "88c5054fd7b3ef535cbdeb3981aed17536c2441305211f8a2115327c8731c80e"
+  url "https://github.com/qkdxorjs1002/tapl/releases/download/0.5.2/taplctl-0.5.2-py3-none-any.whl"
+  version "0.5.2"
+  sha256 "4b228b9fef6d57fef0cb7c3bfb5872ef2e7a6957d56c29be574b58499e06a92d"
   license "MIT"
   head "https://github.com/qkdxorjs1002/tapl.git", branch: "main"
 
@@ -19,6 +19,11 @@ class Taplctl < Formula
 
     venv = virtualenv_create(libexec, "python3.12", system_site_packages: false)
     venv.pip_install_and_link wheel
+  end
+
+  service do
+    run [opt_bin/"taplctl", "searchd", "run"]
+    keep_alive true
   end
 
   def caveats
