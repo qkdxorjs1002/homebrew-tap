@@ -3,9 +3,9 @@ class TaplctlSemantic < Formula
 
   desc "Codex workflow harness with semantic search dependencies"
   homepage "https://github.com/qkdxorjs1002/tapl"
-  url "https://github.com/qkdxorjs1002/tapl/releases/download/0.8.2/taplctl-0.8.2-py3-none-any.whl"
-  version "0.8.2"
-  sha256 "b67352a45f668ddd24a7956bfb6c7de2cb86a25925105ae4ed9e3ada2a394786"
+  url "https://github.com/qkdxorjs1002/tapl/releases/download/0.8.3/taplctl-0.8.3-py3-none-any.whl"
+  version "0.8.3"
+  sha256 "338bd750f011785617bd221bcb7179a99c17e3616b5261f839eee99cb21690d5"
   license "MIT"
   head "https://github.com/qkdxorjs1002/tapl.git", branch: "main"
 
