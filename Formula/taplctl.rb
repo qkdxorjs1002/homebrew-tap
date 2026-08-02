@@ -3,9 +3,9 @@ class Taplctl < Formula
 
   desc "Codex workflow harness backed by repo-local SQLite state"
   homepage "https://github.com/qkdxorjs1002/tapl"
-  url "https://github.com/qkdxorjs1002/tapl/releases/download/1.3.2/taplctl-1.3.2-py3-none-any.whl"
-  version "1.3.2"
-  sha256 "993975836720e3ceb534eec0c101e78169820fb8c79c4297025de3f2ea7feba4"
+  url "https://github.com/qkdxorjs1002/tapl/releases/download/1.4.0/taplctl-1.4.0-py3-none-any.whl"
+  version "1.4.0"
+  sha256 "7312215f2f36880a6dfb56aada0d2f5fffb78c709ff7f3735b1325b9cdb1dd05"
   license "MIT"
   head "https://github.com/qkdxorjs1002/tapl.git", branch: "main"
 
@@ -22,8 +22,11 @@ class Taplctl < Formula
   end
 
   service do
-    run [opt_bin/"taplctl", "searchd", "run"]
+    run [opt_bin/"taplctl", "viewer"]
     keep_alive true
+    restart_delay 5
+    log_path var/"log/taplctl-viewer.log"
+    error_log_path var/"log/taplctl-viewer.log"
   end
 
   def caveats
