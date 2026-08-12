@@ -3,9 +3,9 @@ class TaplctlPre < Formula
 
   desc "Codex workflow harness backed by repo-local SQLite state"
   homepage "https://github.com/qkdxorjs1002/tapl"
-  url "https://github.com/qkdxorjs1002/tapl/releases/download/2.0.0-beta1/taplctl-2.0.0b1-py3-none-any.whl"
-  version "2.0.0b1"
-  sha256 "bfbdbd25c5041659c4bf2ac245edb37512d7a67ec3012c95176cfe368b3730d2"
+  url "https://github.com/qkdxorjs1002/tapl/releases/download/2.0.0-beta2/taplctl-2.0.0b2-py3-none-any.whl"
+  version "2.0.0b2"
+  sha256 "9901fff00caaf279a44ffc789df7ac321d681b897742103fbfa41b27e3401284"
   license "MIT"
   head "https://github.com/qkdxorjs1002/tapl.git", branch: "main"
 
@@ -18,13 +18,13 @@ class TaplctlPre < Formula
   on_macos do
     on_arm do
       resource "mcp-runtime" do
-        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.0.0-beta1/taplctl-mcp-runtime-2.0.0-beta1-macos-arm64.tar.gz"
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.0.0-beta2/taplctl-mcp-runtime-2.0.0-beta2-macos-arm64.tar.gz"
         sha256 "c220598eb790defbb299a40d5bab0c8de4c1b72ae33ead6536fb69f721690e1a"
       end
     end
     on_intel do
       resource "mcp-runtime" do
-        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.0.0-beta1/taplctl-mcp-runtime-2.0.0-beta1-macos-x86_64.tar.gz"
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.0.0-beta2/taplctl-mcp-runtime-2.0.0-beta2-macos-x86_64.tar.gz"
         sha256 "7fbd5d111aa929bd2c3823f8b8b5577bd7a717ec4426ca7df0d4ea61286f39cb"
       end
     end
@@ -32,13 +32,13 @@ class TaplctlPre < Formula
   on_linux do
     on_arm do
       resource "mcp-runtime" do
-        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.0.0-beta1/taplctl-mcp-runtime-2.0.0-beta1-linux-arm64.tar.gz"
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.0.0-beta2/taplctl-mcp-runtime-2.0.0-beta2-linux-arm64.tar.gz"
         sha256 "f92434219dd5adec58bb768d888080cfb255de81b085af05ee0311eae935785a"
       end
     end
     on_intel do
       resource "mcp-runtime" do
-        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.0.0-beta1/taplctl-mcp-runtime-2.0.0-beta1-linux-x86_64.tar.gz"
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.0.0-beta2/taplctl-mcp-runtime-2.0.0-beta2-linux-x86_64.tar.gz"
         sha256 "1cf980c83ea3c99b1c2268c3a8f32b29511a855f370a471c3d2d018b9a46c246"
       end
     end
@@ -71,6 +71,7 @@ class TaplctlPre < Formula
            "--no-index", "--no-deps", "--no-compile", wheel
     bin.install_symlink libexec/"bin/taplctl"
     bin.install_symlink libexec/"bin/tapl-mcp"
+    bin.install_symlink libexec/"bin/tapl-hook"
   end
 
   service do
@@ -91,6 +92,7 @@ class TaplctlPre < Formula
   test do
     # taplctl-mcp-smoke-begin
     assert_path_exists bin/"tapl-mcp"
+    assert_path_exists bin/"tapl-hook"
     system libexec/"bin/python", "-c",
            "from mcp.server import MCPServer; from taplctl.mcp_server import create_server; assert create_server()"
     # taplctl-mcp-smoke-end
