@@ -1,0 +1,35 @@
+class Libkrun < Formula
+  desc "Dynamic library providing microVM-based process isolation"
+  homepage "https://github.com/libkrun/libkrun"
+  url "https://github.com/containers/libkrun/archive/refs/tags/v1.19.4.tar.gz"
+  sha256 "e8775fab2b460972a67ca6cd936296bb79cdb078d852d712a283cb290dd0b284"
+  license "Apache-2.0"
+
+  depends_on "lld" => :build
+  depends_on "rust" => :build
+  depends_on arch: :arm64
+  depends_on "dtc"
+  depends_on "libkrunfw"
+  depends_on "xz"
+
+  def install
+    system "make", "BLK=1", "NET=1", "TIMESYNC=1"
+    system "make", "PREFIX=#{prefix}", "install"
+  end
+
+  test do
+    (testpath/"test.c").write <<~EOS
+      #include <libkrun.h>
+
+      int main()
+      {
+        int context = krun_create_ctx();
+        (void)context;
+        return 0;
+      }
+    EOS
+    system ENV.cc, "test.c", "-I#{include}", "-L#{lib}",
+           "-lkrun", "-o", "test"
+    system "./test"
+  end
+end
