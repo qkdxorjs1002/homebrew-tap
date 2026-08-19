@@ -1,8 +1,8 @@
 class MoraeboxPre < Formula
   desc "Disposable microVM sandbox for coding agents"
   homepage "https://github.com/qkdxorjs1002/moraebox"
-  url "https://github.com/qkdxorjs1002/moraebox/releases/download/0.1.0-alpha5/moraebox-0.1.0-alpha5.tar.gz"
-  sha256 "3baee3328c79058b0f42237dfabb6d06e6e2d46435e5ae49aef6c483cef69a5b"
+  url "https://github.com/qkdxorjs1002/moraebox/releases/download/0.1.0-alpha6/moraebox-0.1.0-alpha6.tar.gz"
+  sha256 "382d2aec8b2b1272aa652c122a2ebb3ac1d8d09819a7a0603874c095b084731a"
   license "Apache-2.0"
 
   depends_on "rust" => :build
@@ -16,6 +16,7 @@ class MoraeboxPre < Formula
     system "cargo", "install", *std_cargo_args(path: "crates/moraebox-cli")
     system "cargo", "install", *std_cargo_args(path: "crates/moraebox-mcp")
     system "cargo", "install", *std_cargo_args(path: "crates/moraebox-vmm-helper")
+    doc.install "LICENSE"
 
     helper = bin/"morae-vmm-helper"
     helper.chmod 0755
