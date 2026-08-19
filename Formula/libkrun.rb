@@ -6,6 +6,7 @@ class Libkrun < Formula
   license "Apache-2.0"
 
   depends_on "lld" => :build
+  depends_on "llvm@22" => :build
   depends_on "rust" => :build
   depends_on arch: :arm64
   depends_on "dtc"
@@ -13,6 +14,7 @@ class Libkrun < Formula
   depends_on "xz"
 
   def install
+    ENV["LIBCLANG_PATH"] = formula_opt_lib("llvm@22").to_s
     system "make", "BLK=1", "NET=1", "TIMESYNC=1"
     system "make", "PREFIX=#{prefix}", "install"
   end

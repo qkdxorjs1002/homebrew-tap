@@ -1,8 +1,8 @@
 class MoraeboxPre < Formula
   desc "Disposable microVM sandbox for coding agents"
   homepage "https://github.com/qkdxorjs1002/moraebox"
-  url "https://github.com/qkdxorjs1002/moraebox/releases/download/0.0.1-alpha1/moraebox-0.0.1-alpha1.tar.gz"
-  sha256 "8eccd3f2936d7d1e611cc44bbcbfd97a9af8585d20505a8ead1b6e25fa0f2cc7"
+  url "https://github.com/qkdxorjs1002/moraebox/releases/download/0.1.0-alpha1/moraebox-0.1.0-alpha1.tar.gz"
+  sha256 "3ac008d40c0ddd596657a58356415c87d9fbdd60d5acb1d0527536c50bb776f6"
   license "Apache-2.0"
 
   depends_on "rust" => :build
@@ -11,8 +11,6 @@ class MoraeboxPre < Formula
   depends_on "libkrun"
   depends_on "libkrunfw"
   depends_on :macos
-
-  conflicts_with "moraebox", because: "both install the moraebox executables"
 
   def install
     system "cargo", "install", *std_cargo_args(path: "crates/moraebox-cli")
