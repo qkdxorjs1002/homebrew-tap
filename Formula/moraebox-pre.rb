@@ -1,8 +1,8 @@
 class MoraeboxPre < Formula
   desc "Disposable microVM sandbox for coding agents"
   homepage "https://github.com/qkdxorjs1002/moraebox"
-  url "https://github.com/qkdxorjs1002/moraebox/releases/download/0.1.0-alpha1/moraebox-0.1.0-alpha1.tar.gz"
-  sha256 "3ac008d40c0ddd596657a58356415c87d9fbdd60d5acb1d0527536c50bb776f6"
+  url "https://github.com/qkdxorjs1002/moraebox/releases/download/0.1.0-alpha2/moraebox-0.1.0-alpha2.tar.gz"
+  sha256 "c453127313d2aef848ba83f4bba124909d06061dc7eae6944d745c97eedf181c"
   license "Apache-2.0"
 
   depends_on "rust" => :build
@@ -31,11 +31,11 @@ class MoraeboxPre < Formula
       developer and the locally built executable is not Apple-notarized.
 
       This formula also installs the pinned libkrun 1.19.4 and libkrunfw
-      5.5.0 runtime dependencies from this tap. For native execution, use:
+      5.5.0 runtime dependencies from this tap. moraebox automatically
+      discovers the signed helper and these libraries, so native execution
+      requires no shell configuration:
 
-        export MORAE_LIBKRUN_PATH="#{formula_opt_lib("libkrun")}/libkrun.dylib"
-        export MORAE_LIBKRUNFW_PATH="#{formula_opt_lib("libkrunfw")}/libkrunfw.dylib"
-        export MORAE_LIB_DIR="#{formula_opt_lib("libkrun")}:#{formula_opt_lib("libkrunfw")}"
+        morae run --image alpine@latest -- /bin/uname -a
 
       Run `morae doctor --json` to inspect the exact paths and signing gate.
     EOS
@@ -49,6 +49,11 @@ class MoraeboxPre < Formula
     doctor = JSON.parse(shell_output("#{bin}/morae doctor --json"))
     assert doctor.dig("libkrun", "found")
     assert doctor.dig("libkrunfw", "found")
+    assert doctor["native_backend_ready"]
+    native_error = shell_output(
+      "#{bin}/morae run --backend libkrun -- /bin/true 2>&1", 1
+    )
+    assert_match "--rootfs, --image, or MORAE_ROOTFS", native_error
     entitlements = shell_output(
       "/usr/bin/codesign -d --entitlements - #{bin}/morae-vmm-helper 2>&1",
     )
