@@ -1,13 +1,14 @@
 class MoraeboxPre < Formula
   desc "Disposable microVM sandbox for coding agents"
   homepage "https://github.com/qkdxorjs1002/moraebox"
-  url "https://github.com/qkdxorjs1002/moraebox/releases/download/0.1.0-alpha8/moraebox-0.1.0-alpha8.tar.gz"
-  sha256 "570cdba386628df261471ab450828d92701c65272d738452d0a43b37915dc4b8"
+  url "https://github.com/qkdxorjs1002/moraebox/releases/download/0.1.0-alpha9/moraebox-0.1.0-alpha9.tar.gz"
+  sha256 "b02f681f2c3771252a3a7c3ce22fbb87d04296e90c82e7aa900a765a6b0731c5"
   license "Apache-2.0"
 
   depends_on "rust" => :build
   depends_on arch: :arm64
   depends_on "e2fsprogs"
+  depends_on "gvproxy"
   depends_on "libkrun"
   depends_on "libkrunfw"
   depends_on :macos
@@ -31,10 +32,10 @@ class MoraeboxPre < Formula
       with its Hypervisor entitlement. The signature does not identify a
       developer and the locally built executable is not Apple-notarized.
 
-      This formula also installs the pinned libkrun 1.19.4 and libkrunfw
-      5.5.0 runtime dependencies from this tap. moraebox automatically
-      discovers the signed helper and these libraries, so native execution
-      requires no shell configuration:
+      This formula also installs the pinned gvproxy 0.8.9, libkrun 1.19.4,
+      and libkrunfw 5.5.0 runtime dependencies from this tap. moraebox
+      automatically discovers the signed helper and these dependencies, so
+      native execution and opt-in networking require no shell configuration:
 
         morae run --image alpine@latest -- /bin/uname -a
 
@@ -48,9 +49,11 @@ class MoraeboxPre < Formula
                  shell_output("#{bin}/morae run --backend process -- /bin/echo morae")
     assert_match "stdio MCP server", shell_output("#{bin}/morae-mcp --help")
     doctor = JSON.parse(shell_output("#{bin}/morae doctor --json"))
+    assert doctor.dig("gvproxy", "found")
     assert doctor.dig("libkrun", "found")
     assert doctor.dig("libkrunfw", "found")
     assert doctor["native_backend_ready"]
+    assert doctor["native_network_ready"]
     native_error = shell_output(
       "#{bin}/morae run --backend libkrun -- /bin/true 2>&1", 1
     )
