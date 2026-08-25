@@ -1,4 +1,4 @@
-class MoraeboxPre < Formula
+class Moraebox < Formula
   desc "Disposable microVM sandbox for coding agents"
   homepage "https://github.com/qkdxorjs1002/moraebox"
   url "https://github.com/qkdxorjs1002/moraebox/releases/download/0.1.0/moraebox-0.1.0.tar.gz"
@@ -14,7 +14,7 @@ class MoraeboxPre < Formula
   depends_on "libkrunfw"
   depends_on :macos
 
-  conflicts_with "moraebox", because: "both install the moraebox executables"
+  conflicts_with "moraebox-pre", because: "both install the moraebox executables"
 
   def install
     system "cargo", "install", *std_cargo_args(path: "crates/moraebox-cli")
