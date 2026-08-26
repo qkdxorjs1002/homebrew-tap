@@ -1,8 +1,8 @@
 class Moraebox < Formula
   desc "Disposable microVM sandbox for coding agents"
   homepage "https://github.com/qkdxorjs1002/moraebox"
-  url "https://github.com/qkdxorjs1002/moraebox/releases/download/0.1.1/moraebox-0.1.1.tar.gz"
-  sha256 "cf4d04a9e71e08a6756fc81036807f45ab7b2df47963f930ca2feaee0759d042"
+  url "https://github.com/qkdxorjs1002/moraebox/releases/download/0.2.0/moraebox-0.2.0.tar.gz"
+  sha256 "b9963159eae17ee42043eb9886533747a327b5165d707bb48319551badffd144"
   license "Apache-2.0"
 
   depends_on "go" => :build
