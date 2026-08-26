@@ -3,9 +3,9 @@ class TaplctlPre < Formula
 
   desc "Codex workflow harness backed by repo-local SQLite state"
   homepage "https://github.com/qkdxorjs1002/tapl"
-  url "https://github.com/qkdxorjs1002/tapl/releases/download/2.1.1/taplctl-2.1.1-py3-none-any.whl"
-  version "2.1.1"
-  sha256 "fceafa33b10c03f0898b7aba3e871b68c1692bbdbbd9adfe44f140b18392d8f0"
+  url "https://github.com/qkdxorjs1002/tapl/releases/download/2.1.2/taplctl-2.1.2-py3-none-any.whl"
+  version "2.1.2"
+  sha256 "8d0adef0172f1f8ace4e7d6cc4d3c7a019c2ee16d130d37952371b1643018990"
   license "MIT"
   head "https://github.com/qkdxorjs1002/tapl.git", branch: "main"
 
@@ -18,13 +18,13 @@ class TaplctlPre < Formula
   on_macos do
     on_arm do
       resource "mcp-runtime" do
-        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.1.1/taplctl-mcp-runtime-2.1.1-macos-arm64.tar.gz"
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.1.2/taplctl-mcp-runtime-2.1.2-macos-arm64.tar.gz"
         sha256 "547282a1a2a3d16397af9bd94476f11a7f99dd0b757ee3234a86030ba32253bf"
       end
     end
     on_intel do
       resource "mcp-runtime" do
-        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.1.1/taplctl-mcp-runtime-2.1.1-macos-x86_64.tar.gz"
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.1.2/taplctl-mcp-runtime-2.1.2-macos-x86_64.tar.gz"
         sha256 "4e08e2489d3a9f938e30f76f72cd66accc010fbd188ddbdb5c497fca7b051595"
       end
     end
@@ -32,13 +32,13 @@ class TaplctlPre < Formula
   on_linux do
     on_arm do
       resource "mcp-runtime" do
-        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.1.1/taplctl-mcp-runtime-2.1.1-linux-arm64.tar.gz"
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.1.2/taplctl-mcp-runtime-2.1.2-linux-arm64.tar.gz"
         sha256 "ea091aaee384db9db597778e796a37e84008d43db7460606e8e220f982106ca4"
       end
     end
     on_intel do
       resource "mcp-runtime" do
-        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.1.1/taplctl-mcp-runtime-2.1.1-linux-x86_64.tar.gz"
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.1.2/taplctl-mcp-runtime-2.1.2-linux-x86_64.tar.gz"
         sha256 "061c6a5b2bda792a4d7fbd4ec727ee279a0a9272b1847a002f9161d8129484cd"
       end
     end
