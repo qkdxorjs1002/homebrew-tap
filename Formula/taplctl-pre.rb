@@ -3,9 +3,9 @@ class TaplctlPre < Formula
 
   desc "Codex workflow harness backed by repo-local SQLite state"
   homepage "https://github.com/qkdxorjs1002/tapl"
-  url "https://github.com/qkdxorjs1002/tapl/releases/download/2.14.0/taplctl-2.14.0-py3-none-any.whl"
-  version "2.14.0"
-  sha256 "07e7dbbd502afb6e745496dfdf176440e7fb08de552e83ea508af57c6d464c54"
+  url "https://github.com/qkdxorjs1002/tapl/releases/download/2.15.0/taplctl-2.15.0-py3-none-any.whl"
+  version "2.15.0"
+  sha256 "c2b7b789be25baf829d793f3b7843bbc0da16467916e4fecc5aa2ee8680bdd76"
   license "MIT"
   head "https://github.com/qkdxorjs1002/tapl.git", branch: "main"
 
@@ -18,27 +18,27 @@ class TaplctlPre < Formula
   on_macos do
     on_arm do
       resource "mcp-runtime" do
-        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.14.0/taplctl-mcp-runtime-2.14.0-macos-arm64.tar.gz"
-        sha256 "e380f2940675be65b50dd0cce24c29ed5dcc416358fcc1947c70e6de7f25d452"
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.15.0/taplctl-mcp-runtime-2.15.0-macos-arm64.tar.gz"
+        sha256 "eb6ca581e7feba720d9d256425e149686b62c8b38dda73479ad85b83615ed1c8"
       end
     end
     on_intel do
       resource "mcp-runtime" do
-        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.14.0/taplctl-mcp-runtime-2.14.0-macos-x86_64.tar.gz"
-        sha256 "ea4b007032adc03516a7be755fa9dfbc4dccc63f20be913d25c95aa28768754b"
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.15.0/taplctl-mcp-runtime-2.15.0-macos-x86_64.tar.gz"
+        sha256 "291d65120daac624719194c34595ab9a338f4fb85e065b78896075680c77a217"
       end
     end
   end
   on_linux do
     on_arm do
       resource "mcp-runtime" do
-        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.14.0/taplctl-mcp-runtime-2.14.0-linux-arm64.tar.gz"
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.15.0/taplctl-mcp-runtime-2.15.0-linux-arm64.tar.gz"
         sha256 "627ae636c20c2c6c87d0a2b3de0790f28b83c9f6d4883710c052960d77c5e729"
       end
     end
     on_intel do
       resource "mcp-runtime" do
-        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.14.0/taplctl-mcp-runtime-2.14.0-linux-x86_64.tar.gz"
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.15.0/taplctl-mcp-runtime-2.15.0-linux-x86_64.tar.gz"
         sha256 "e1aec44c9d83fdb8b2af6570529021c317c3f2cfe549191b65b41079b071c987"
       end
     end
