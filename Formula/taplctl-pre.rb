@@ -3,45 +3,63 @@ class TaplctlPre < Formula
 
   desc "Codex workflow harness backed by repo-local SQLite state"
   homepage "https://github.com/qkdxorjs1002/tapl"
-  url "https://github.com/qkdxorjs1002/tapl/releases/download/2.24.2/taplctl-2.24.2-py3-none-any.whl"
-  version "2.24.2"
-  sha256 "88814326dc11a50fc346c076eddf98b93051f033a0429bf89a866ab4ddb6cc32"
+  url "https://github.com/qkdxorjs1002/tapl/releases/download/2.25.2/taplctl-2.25.2-py3-none-any.whl"
+  version "2.25.2"
+  sha256 "22ee6f2024b194b67a5d63bc4432348302b375a1768d48b7b827755cb391ac0d"
   license "MIT"
   head "https://github.com/qkdxorjs1002/tapl.git", branch: "main"
 
   depends_on "python@3.12"
 
   conflicts_with "taplctl", because: "both install the taplctl executable"
-  conflicts_with "taplctl-semantic", because: "both install the taplctl executable"
 
   # taplctl-mcp-runtime-begin
   on_macos do
     on_arm do
       resource "mcp-runtime" do
-        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.24.2/taplctl-mcp-runtime-2.24.2-macos-arm64.tar.gz"
-        sha256 "68fb7fbdc25f31a90a7b1a042aadc1e7cf3c40ca8f7fd28a3d41693afc19c650"
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.25.2/taplctl-mcp-runtime-2.25.2-macos-arm64.tar.gz"
+        sha256 "b95381c18d762099570f06ae6ebce6cfb73058d294c21a53fb0009e30620f0a4"
+      end
+      resource "semantic-runtime" do
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.25.2/taplctl-semantic-runtime-2.25.2-macos-arm64.tar.gz"
+        sha256 "1e805db67b60563fca4a1ae3745cd2ca8d2a19034632aaf01e5d98ec23dc43d9"
       end
     end
     on_intel do
       resource "mcp-runtime" do
-        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.24.2/taplctl-mcp-runtime-2.24.2-macos-x86_64.tar.gz"
-        sha256 "9ecef5c7d0acd2abbcb2ddcfafed4d87e84161a6c0cbf2ae24e41306413ac8d1"
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.25.2/taplctl-mcp-runtime-2.25.2-macos-x86_64.tar.gz"
+        sha256 "3062972039ef3be904bd7436f16fedc260432747b015c9478add5a9cdd6a1d00"
       end
     end
   end
   on_linux do
     on_arm do
       resource "mcp-runtime" do
-        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.24.2/taplctl-mcp-runtime-2.24.2-linux-arm64.tar.gz"
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.25.2/taplctl-mcp-runtime-2.25.2-linux-arm64.tar.gz"
         sha256 "0dbe6cbb1e586686ed11400ffb244556372c3189b90ada229e165a50084c7b71"
+      end
+      resource "semantic-runtime" do
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.25.2/taplctl-semantic-runtime-2.25.2-linux-arm64.tar.gz"
+        sha256 "c5d7079fa559092a4b0eeba4d74284a74c82cbdb1b99929d35f6fe0f543ce236"
       end
     end
     on_intel do
       resource "mcp-runtime" do
-        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.24.2/taplctl-mcp-runtime-2.24.2-linux-x86_64.tar.gz"
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.25.2/taplctl-mcp-runtime-2.25.2-linux-x86_64.tar.gz"
         sha256 "232598060bd688ac247c27ac289610cf8216646194b9279734bec83cf31a8d43"
       end
+      resource "semantic-runtime" do
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.25.2/taplctl-semantic-runtime-2.25.2-linux-x86_64.tar.gz"
+        sha256 "d517f83f752e3f7198bd0d41ff839b38963022aa81ed643df387fd086656dd67"
+      end
     end
+  end
+
+  def semantic_supported?
+    return Hardware::CPU.arm? && MacOS.version >= :sonoma if OS.mac?
+
+    quiet_system Formula["python@3.12"].opt_bin/"python3.12", "-c",
+                 "import os, sys; v = os.confstr('CS_GNU_LIBC_VERSION').split()[1]; sys.exit(tuple(map(int, v.split('.'))) < (2, 28))"
   end
   # taplctl-mcp-runtime-end
 
@@ -55,14 +73,8 @@ class TaplctlPre < Formula
     wheelhouse = buildpath/"wheelhouse"
     wheelhouse.mkpath
     resource("mcp-runtime").stage { wheelhouse.install Dir["*.whl"] }
-    runtime_packages = wheelhouse.glob("*.whl").map do |runtime_wheel|
-      runtime_wheel.basename.to_s.split("-", 2).first.tr("_", "-").downcase
-    end
-    resources.each do |resource|
-      next if resource.name == "mcp-runtime"
-      next if runtime_packages.include?(resource.name.tr("_", "-").downcase)
-
-      resource.stage { wheelhouse.install Dir["*.whl"] }
+    if semantic_supported?
+      resource("semantic-runtime").stage { wheelhouse.install Dir["*.whl"] }
     end
 
     dependency_wheels = wheelhouse.glob("*.whl")
@@ -99,19 +111,15 @@ class TaplctlPre < Formula
     error_log_path var/"log/taplctl-viewer.log"
   end
 
-  def caveats
-    <<~EOS
-      Semantic search dependencies are not installed by this formula.
-      Install qkdxorjs1002/tap/taplctl-semantic to enable embedding search.
-    EOS
-  end
-
   test do
     # taplctl-mcp-smoke-begin
     assert_path_exists bin/"tapl-mcp"
     assert_path_exists bin/"tapl-hook"
     system libexec/"bin/python", "-c",
            "from mcp.server import MCPServer; from taplctl.mcp_server import create_server; assert create_server()"
+    if semantic_supported?
+      system libexec/"bin/python", "-c", "import numpy, onnxruntime, sqlite_vec, tokenizers"
+    end
     # taplctl-mcp-smoke-end
 
     assert_match(/\Ataplctl \d+\.\d+\.\d+(?:(?:a|b|rc)\d+)?\z/, shell_output("#{bin}/taplctl --version").strip)
