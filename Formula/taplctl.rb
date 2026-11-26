@@ -3,9 +3,9 @@ class Taplctl < Formula
 
   desc "Codex workflow harness backed by repo-local SQLite state"
   homepage "https://github.com/qkdxorjs1002/tapl"
-  url "https://github.com/qkdxorjs1002/tapl/releases/download/2.25.3/taplctl-2.25.3-py3-none-any.whl"
-  version "2.25.3"
-  sha256 "43b5f971386d67dff2c07ee0fca4553492f4902531dbda7cea0f48e5a3c8b337"
+  url "https://github.com/qkdxorjs1002/tapl/releases/download/2.25.5/taplctl-2.25.5-py3-none-any.whl"
+  version "2.25.5"
+  sha256 "0f89fc188e3f5029df08210eb599352ed3798e4484ff4718d782ace4f76e96e9"
   license "MIT"
   head "https://github.com/qkdxorjs1002/tapl.git", branch: "main"
 
@@ -17,39 +17,39 @@ class Taplctl < Formula
   on_macos do
     on_arm do
       resource "mcp-runtime" do
-        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.25.3/taplctl-mcp-runtime-2.25.3-macos-arm64.tar.gz"
-        sha256 "c92ef76a515956c5d179aef119acab5e9efbee6760312f5233e58e9e52f8cec2"
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.25.5/taplctl-mcp-runtime-2.25.5-macos-arm64.tar.gz"
+        sha256 "60cc4b13f812b9c2c42a89cbf9829cfaef9774ee33e3503214642bd1ae695883"
       end
       resource "semantic-runtime" do
-        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.25.3/taplctl-semantic-runtime-2.25.3-macos-arm64.tar.gz"
-        sha256 "021d2e24fddfd72123b267bf4cece575e588008554caf8626b4028a324bb9c9b"
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.25.5/taplctl-semantic-runtime-2.25.5-macos-arm64.tar.gz"
+        sha256 "2eda91a21eadc77ee94f746de2ccc50f0d5c658e0d413cde3f0b380747a8da7c"
       end
     end
     on_intel do
       resource "mcp-runtime" do
-        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.25.3/taplctl-mcp-runtime-2.25.3-macos-x86_64.tar.gz"
-        sha256 "b7751929b6ba63a3a7746f51947bd3603d0c3fde60fc6320ab914e331e74dfb4"
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.25.5/taplctl-mcp-runtime-2.25.5-macos-x86_64.tar.gz"
+        sha256 "f3f45e793f5857be39771e07baf5562e64326d222e74f93933dccf927665eef7"
       end
     end
   end
   on_linux do
     on_arm do
       resource "mcp-runtime" do
-        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.25.3/taplctl-mcp-runtime-2.25.3-linux-arm64.tar.gz"
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.25.5/taplctl-mcp-runtime-2.25.5-linux-arm64.tar.gz"
         sha256 "0dbe6cbb1e586686ed11400ffb244556372c3189b90ada229e165a50084c7b71"
       end
       resource "semantic-runtime" do
-        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.25.3/taplctl-semantic-runtime-2.25.3-linux-arm64.tar.gz"
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.25.5/taplctl-semantic-runtime-2.25.5-linux-arm64.tar.gz"
         sha256 "c5d7079fa559092a4b0eeba4d74284a74c82cbdb1b99929d35f6fe0f543ce236"
       end
     end
     on_intel do
       resource "mcp-runtime" do
-        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.25.3/taplctl-mcp-runtime-2.25.3-linux-x86_64.tar.gz"
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.25.5/taplctl-mcp-runtime-2.25.5-linux-x86_64.tar.gz"
         sha256 "232598060bd688ac247c27ac289610cf8216646194b9279734bec83cf31a8d43"
       end
       resource "semantic-runtime" do
-        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.25.3/taplctl-semantic-runtime-2.25.3-linux-x86_64.tar.gz"
+        url "https://github.com/qkdxorjs1002/tapl/releases/download/2.25.5/taplctl-semantic-runtime-2.25.5-linux-x86_64.tar.gz"
         sha256 "d517f83f752e3f7198bd0d41ff839b38963022aa81ed643df387fd086656dd67"
       end
     end
